@@ -31,9 +31,9 @@ blogForm.addEventListener('submit', function(event) {
     }
 
     if (editPostId !== null) {
-        updatePost();
+        updatePost(editPostId);
     } else addPost();
-    
+
     });
 
 //If valid, create a new post object (e.g., with id, title, content, timestamp).
@@ -94,6 +94,17 @@ function editPost(id) {
     inputTitle.value = postToEdit.title;
     inputPost.value = postToEdit.content;
 }
+
+function updatePost(id) {
+    const postToUpdate = blogPosts.find(post => post.id === id);
+
+    postToUpdate.title = inputTitle.value;
+    postToUpdate.content = inputPost.value;
+    
+    displayPosts();
+
+    editPostId = null;
+};
 //Load Posts from localStorage: On script load, check localStorage for existing posts. If found, parse them and render them on the page.
 //Each post should include its title, content, an “Edit” button, and a “Delete” button. Ensure new posts are added to the display without needing a page refresh.
 
@@ -108,7 +119,7 @@ function editPost(id) {
     //Update localStorage.
     //Re-render the posts.
     
-    //When an “Edit” button is clicked, populate the form (or a dedicated edit form/modal) with the selected post’s title and content. You’ll need a way to track which post is being edited.
+    //When an “Edit” button is clicked, populate the form (or a dedicated edit form/modal) with the selected post’s title and content. 
     //Modify the form submission logic (or create a separate update function) to update the existing post in your local array instead of creating a new one.
     //Update localStorage.
     //Re-render the posts.

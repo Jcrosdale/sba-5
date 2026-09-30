@@ -64,19 +64,27 @@ function displayPosts () {
         let postTitle = document.createElement('h3');
         let postContent = document.createElement('p');
         let editButton = document.createElement('button');
+        let deleteButton = document.createElement('button');
 
         postTitle.textContent = post.title;
         postContent.textContent = post.content;
         editButton.textContent = 'Edit';
+        deleteButton.textContent = 'Delete';
 
         //Add event listeners to “Edit” buttons.
         editButton.addEventListener('click', function() {
             editPost(post.id);
         })
 
+        // Use event delegation or add event listeners to “Delete” buttons.
+        deleteButton.addEventListener('click', function() {
+            deletePost(post.id); //When a “Delete” button is clicked, identify the post to be deleted 
+        })
+
         postList.appendChild(postTitle);
         postList.appendChild(postContent);
         postList.appendChild(editButton);
+        postList.appendChild(deleteButton);
 
         blogList.appendChild(postList);
 
@@ -101,26 +109,31 @@ function updatePost(id) {
     postToUpdate.title = inputTitle.value;
     postToUpdate.content = inputPost.value;
     
+    //Re-render the posts.
     displayPosts();
 
     editPostId = null;
 };
+
+function deletePost(id) {
+    //Remove the post from your local array.
+    blogPosts = blogPosts.filter(post => post.id !== id); // Returns array with only objects that match the condition
+
+    //Re-render the posts.
+    displayPosts();
+
+    }
 //Load Posts from localStorage: On script load, check localStorage for existing posts. If found, parse them and render them on the page.
 //Each post should include its title, content, an “Edit” button, and a “Delete” button. Ensure new posts are added to the display without needing a page refresh.
 
     //Save the updated array of posts to localStorage (remember to JSON.stringify).
     //Re-render the list of posts on the page.
     //Clear the form fields.
-
-//Handle Delete Post
-    //Use event delegation or add event listeners to “Delete” buttons.
-    //When a “Delete” button is clicked, identify the post to be deleted (e.g., using a data attribute for the post ID).
-    //Remove the post from your local array.
+    
     //Update localStorage.
-    //Re-render the posts.
     
     //When an “Edit” button is clicked, populate the form (or a dedicated edit form/modal) with the selected post’s title and content. 
     //Modify the form submission logic (or create a separate update function) to update the existing post in your local array instead of creating a new one.
     //Update localStorage.
-    //Re-render the posts.
+    
 //Utility Functions (Optional but Recommended): Consider helper functions for tasks like generating unique IDs, saving to localStorage, loading from localStorage, etc.

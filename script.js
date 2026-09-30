@@ -29,15 +29,46 @@ blogForm.addEventListener('submit', function(event) {
         postError.textContent = "Please enter a post";
         return;
     }
+
+    addPost();
     });
 
-//Load Posts from localStorage: On script load, check localStorage for existing posts. If found, parse them and render them on the page.
-//Render Posts Function: Create a function that takes the array of posts and dynamically creates the HTML to display them. Each post should include its title, content, an “Edit” button, and a “Delete” button. Ensure new posts are added to the display without needing a page refresh.
-
-//Handle New Post Form Submission
-    //Validate the form inputs (title and content are required). 
-    //If valid, create a new post object (e.g., with id, title, content, timestamp).
+//If valid, create a new post object (e.g., with id, title, content, timestamp).
+function addPost () {
+    
+    const post = {
+        title: inputTitle.value,
+        content: inputPost.value
+    }
     //Add the new post to your local array of posts.
+    blogPosts.push(post);
+
+    displayPosts();
+};
+
+// Create a function that takes the array of posts and dynamically creates the HTML to display them.
+function displayPosts () {
+    
+    blogList.innerHTML = "";
+
+    for (let post of blogPosts) {
+
+        let postList = document.createElement('li');
+        let postTitle = document.createElement('h3');
+        let postContent = document.createElement('p');
+
+        postTitle.textContent = post.title;
+        postContent.textContent = post.content;
+
+        postList.appendChild(postTitle);
+        postList.appendChild(postContent);
+        blogList.appendChild(postList);
+    }
+}
+
+//Load Posts from localStorage: On script load, check localStorage for existing posts. If found, parse them and render them on the page.
+//Each post should include its title, content, an “Edit” button, and a “Delete” button. Ensure new posts are added to the display without needing a page refresh.
+
     //Save the updated array of posts to localStorage (remember to JSON.stringify).
     //Re-render the list of posts on the page.
     //Clear the form fields.

@@ -1,13 +1,41 @@
 // Core Logic
-//Global Variables/State: Plan how you’ll manage your posts (e.g., an array of post objects).
+
+//=Plan how you’ll manage your posts (e.g., an array of post objects).
+let blogPosts = [];
+
 //DOM Element Selection: Get references to your form, input fields, error message elements, post display area, etc.
+const blogForm = document.getElementById('blog-form');
+const inputTitle = document.getElementById('title-input');
+const inputPost = document.getElementById('blog-post');
+const titleError = document.getElementById('title-error');
+const postError = document.getElementById('post-error');
+const blogList = document.getElementById('blog-list');
+
+//Add an event listener to the form’s submit event.
+blogForm.addEventListener('submit', function(event) {
+
+    event.preventDefault(); //Prevent the default form submission 
+
+    let titleText = inputTitle.value; // gets text from input
+    let postText = inputPost.value;
+    
+    //Display custom error messages if invalid.
+    if (titleText === "") {
+        titleError.textContent = "Please enter a title"; // puts text inside span
+        return;
+````}
+
+    if (postText === "") {
+        postError.textContent = "Please enter a post";
+        return;
+    }
+    });
+
 //Load Posts from localStorage: On script load, check localStorage for existing posts. If found, parse them and render them on the page.
 //Render Posts Function: Create a function that takes the array of posts and dynamically creates the HTML to display them. Each post should include its title, content, an “Edit” button, and a “Delete” button. Ensure new posts are added to the display without needing a page refresh.
 
 //Handle New Post Form Submission
-    //Add an event listener to the form’s submit event.
-    //Prevent the default form submission using event.preventDefault().
-    //Validate the form inputs (title and content are required). Display custom error messages if invalid.
+    //Validate the form inputs (title and content are required). 
     //If valid, create a new post object (e.g., with id, title, content, timestamp).
     //Add the new post to your local array of posts.
     //Save the updated array of posts to localStorage (remember to JSON.stringify).

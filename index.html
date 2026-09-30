@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SBA 5 - Personal Blog</title>
+    <title>Interactive Personal Blog PLatform (SBA 5)</title>
 
     <!-- Link your styles.css and script.js files.-->
     <link href="styles.css" alt="stylesheet">
@@ -16,18 +16,20 @@
     <!-- Create a section for the new post form -->
     <h2>New Section</h2>
     <!--Include input for title -->
-    <input id="title-input" type="text" placeholder="Enter title" required/>
-    <span id="title-error"></span> <!-- Validation error messages -->
-    <!-- Textarea for content -->
-    <textarea id="blog" name="post" rows="7" cols="45" placeholder="What's on your mind?"></textarea>
-    <span id="post-error"></span> <!-- Validation error messages -->
-    <!-- Submit button -->
-    <button id="submit-button" type="button">Submit</button>
+    <form action="" method="get" id="blog-form">
+        <input id="title-input" type="text" placeholder="Enter title" required />
+        <span id="title-error"></span> <!-- Validation error messages -->
+        <!-- Textarea for content -->
+        <textarea id="blog-post" name="post" rows="7" cols="45" placeholder="What's on your mind?" required></textarea>
+        <span id="post-error"></span> <!-- Validation error messages -->
+        <!-- Submit button -->
+        <button id="submit-button" type="submit">Submit</button>
+    </form>
     <!-- Create a section where the list of blog posts will be displayed dynamically. -->
-     <h2>Blog Posts</h2>
-     <ul id="blog-list"></ul>
-    
-    
+    <h2>Blog Posts</h2>
+    <ul id="blog-list"></ul>
+
+
 </body>
 
 </html>

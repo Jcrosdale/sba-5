@@ -30,16 +30,23 @@ blogForm.addEventListener('submit', function(event) {
         return;
     }
 
-    addPost();
+    if (editPostId !== null) {
+        updatePost();
+    } else addPost();
+    
     });
 
 //If valid, create a new post object (e.g., with id, title, content, timestamp).
 function addPost () {
-    
+    const newPostId = blogPosts.reduce((maxId, post) => // .reduce() turns all elements of an array to a single value
+        Math.max(maxId, post.id), 0) + 1;
+
     const post = {
+        id: newPostId,
         title: inputTitle.value,
         content: inputPost.value
     }
+
     //Add the new post to your local array of posts.
     blogPosts.push(post);
 
@@ -56,16 +63,37 @@ function displayPosts () {
         let postList = document.createElement('li');
         let postTitle = document.createElement('h3');
         let postContent = document.createElement('p');
+        let editButton = document.createElement('button');
 
         postTitle.textContent = post.title;
         postContent.textContent = post.content;
+        editButton.textContent = 'Edit';
+
+        //Add event listeners to “Edit” buttons.
+        editButton.addEventListener('click', function() {
+            editPost(post.id);
+        })
 
         postList.appendChild(postTitle);
         postList.appendChild(postContent);
+        postList.appendChild(editButton);
+
         blogList.appendChild(postList);
+
+
     }
 }
 
+let editPostId = null; // Indicates a post is being edited, not created
+
+function editPost(id) {
+    const postToEdit = blogPosts.find(post => post.id === id); //finds first matching item, returns object itself
+
+    editPostId = id;
+    // User can change title/content
+    inputTitle.value = postToEdit.title;
+    inputPost.value = postToEdit.content;
+}
 //Load Posts from localStorage: On script load, check localStorage for existing posts. If found, parse them and render them on the page.
 //Each post should include its title, content, an “Edit” button, and a “Delete” button. Ensure new posts are added to the display without needing a page refresh.
 
@@ -79,9 +107,7 @@ function displayPosts () {
     //Remove the post from your local array.
     //Update localStorage.
     //Re-render the posts.
-
-//Handle Edit Post:
-    //Add event listeners to “Edit” buttons.
+    
     //When an “Edit” button is clicked, populate the form (or a dedicated edit form/modal) with the selected post’s title and content. You’ll need a way to track which post is being edited.
     //Modify the form submission logic (or create a separate update function) to update the existing post in your local array instead of creating a new one.
     //Update localStorage.

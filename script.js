@@ -1,7 +1,14 @@
 // Core Logic
 
-//=Plan how you’ll manage your posts (e.g., an array of post objects).
+//Plan how you’ll manage your posts (e.g., an array of post objects).
 let blogPosts = [];
+
+const savedPosts = localStorage.getItem('blogPosts');
+
+// If savedPosts has a value, replace empty array with saved posts
+if (savedPosts) {
+    blogPosts = JSON.parse(savedPosts); 
+}
 
 //DOM Element Selection: Get references to your form, input fields, error message elements, post display area, etc.
 const blogForm = document.getElementById('blog-form');
@@ -10,6 +17,9 @@ const inputPost = document.getElementById('blog-post');
 const titleError = document.getElementById('title-error');
 const postError = document.getElementById('post-error');
 const blogList = document.getElementById('blog-list');
+
+// displays list with saved posts each refresh
+displayPosts();
 
 //Add an event listener to the form’s submit event.
 blogForm.addEventListener('submit', function(event) {
@@ -49,6 +59,9 @@ function addPost () {
 
     //Add the new post to your local array of posts.
     blogPosts.push(post);
+
+    // converts to string for local storage
+    localStorage.setItem('blogPosts', JSON.stringify(blogPosts)); 
 
     displayPosts();
 };
@@ -109,6 +122,9 @@ function updatePost(id) {
     postToUpdate.title = inputTitle.value;
     postToUpdate.content = inputPost.value;
     
+    // converts to string for local storage
+    localStorage.setItem('blogPosts', JSON.stringify(blogPosts)); 
+
     //Re-render the posts.
     displayPosts();
 
@@ -119,21 +135,20 @@ function deletePost(id) {
     //Remove the post from your local array.
     blogPosts = blogPosts.filter(post => post.id !== id); // Returns array with only objects that match the condition
 
+    // converts to string for local storage
+    localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+
     //Re-render the posts.
     displayPosts();
 
     }
 //Load Posts from localStorage: On script load, check localStorage for existing posts. If found, parse them and render them on the page.
-//Each post should include its title, content, an “Edit” button, and a “Delete” button. Ensure new posts are added to the display without needing a page refresh.
 
     //Save the updated array of posts to localStorage (remember to JSON.stringify).
     //Re-render the list of posts on the page.
     //Clear the form fields.
     
-    //Update localStorage.
-    
     //When an “Edit” button is clicked, populate the form (or a dedicated edit form/modal) with the selected post’s title and content. 
     //Modify the form submission logic (or create a separate update function) to update the existing post in your local array instead of creating a new one.
-    //Update localStorage.
-    
+
 //Utility Functions (Optional but Recommended): Consider helper functions for tasks like generating unique IDs, saving to localStorage, loading from localStorage, etc.

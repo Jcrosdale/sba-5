@@ -12,9 +12,21 @@
 </head>
 
 <body>
-    <!-- Create a section for the new post form (including input for title, textarea for content, and a submit button). -->
+    <h1>Personal Blog</h1>
+    <!-- Create a section for the new post form -->
+    <h2>New Section</h2>
+    <!--Include input for title -->
+    <input id="title-input" type="text" placeholder="Enter title" required/>
+    <span id="title-error"></span> <!-- Validation error messages -->
+    <!-- Textarea for content -->
+    <textarea id="blog" name="post" rows="7" cols="45" placeholder="What's on your mind?"></textarea>
+    <span id="post-error"></span> <!-- Validation error messages -->
+    <!-- Submit button -->
+    <button id="submit-button" type="button">Submit</button>
     <!-- Create a section where the list of blog posts will be displayed dynamically. -->
-    <!-- Ensure you have elements (e.g., <span>) near your form inputs to display validation error messages. -->
+     <h2>Blog Posts</h2>
+     <ul id="blog-list"></ul>
+    
     
 </body>
 

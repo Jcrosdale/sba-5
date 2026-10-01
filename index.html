@@ -6,27 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Personal Blog PLatform (SBA 5)</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rouge+Script&display=swap" rel="stylesheet">
+
     <!-- Link your styles.css and script.js files.-->
-    <link href="styles.css" alt="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     <script src="script.js" defer></script>
+
 </head>
 
 <body>
     <h1>Personal Blog</h1>
     <!-- Create a section for the new post form -->
-    <h2>New Section</h2>
     <!--Include input for title -->
     <form action="" method="get" id="blog-form">
+        <label for="title-input">Title</label>
         <input id="title-input" type="text" placeholder="Enter title" required />
         <span id="title-error"></span> <!-- Validation error messages -->
         <!-- Textarea for content -->
+        <label for="blog-post">Posts</label>
         <textarea id="blog-post" name="post" rows="7" cols="45" placeholder="What's on your mind?" required></textarea>
         <span id="post-error"></span> <!-- Validation error messages -->
         <!-- Submit button -->
         <button id="submit-button" type="submit">Submit</button>
     </form>
     <!-- Create a section where the list of blog posts will be displayed dynamically. -->
-    <h2>Blog Posts</h2>
+    <label for="blog-post">Blog Posts</label>
     <ul id="blog-list"></ul>
 
 

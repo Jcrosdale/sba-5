@@ -1,5 +1,60 @@
-/* Apply basic styling to make the application clean, readable, and user-friendly. */
-
 /* Style the form, input fields, buttons, and the display area for posts. */
+body {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 0 20px;
+    background-color: #FCE5FC;
+}
 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-family: "Rouge Script", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+}
+h1 {
+    text-align: center;
+}
+#submit-button {
+    height: 50px;
+    background-color: white;
+}
+#submit-button:hover {
+    background-color: rgb(105, 238, 238);
+}
+#blog-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0;
+}
+#blog-list li {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid;
+    border-radius: 8px;
+
+}
+.edit-button, .delete-button {
+    height: 40px;
+    width: 100px;
+    background-color: white;
+    padding: 10px;
+}
+.edit-button:hover {
+    background-color: rgb(105, 238, 238);
+}
+.delete-button:hover {
+    background-color: lightcoral;
+}
 /* Style the error messages to be noticeable (e.g., red text). */
+#post-error, #title-error {
+    color: red;
+    font-size: 1rem;
+    font-weight: 600;
+}

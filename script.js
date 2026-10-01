@@ -7,7 +7,7 @@ const savedPosts = localStorage.getItem('blogPosts');
 
 // If savedPosts has a value, replace empty array with saved posts
 if (savedPosts) {
-    blogPosts = JSON.parse(savedPosts); 
+    blogPosts = JSON.parse(savedPosts);
 }
 
 //DOM Element Selection: Get references to your form, input fields, error message elements, post display area, etc.
@@ -22,18 +22,19 @@ const blogList = document.getElementById('blog-list');
 displayPosts();
 
 //Add an event listener to the form’s submit event.
-blogForm.addEventListener('submit', function(event) {
+blogForm.addEventListener('submit', function (event) {
 
     event.preventDefault(); //Prevent the default form submission 
 
     let titleText = inputTitle.value; // gets text from input
     let postText = inputPost.value;
-    
+
     //Display custom error messages if invalid.
     if (titleText === "") {
         titleError.textContent = "Please enter a title"; // puts text inside span
         return;
-````}
+        ````
+    }
 
     if (postText === "") {
         postError.textContent = "Please enter a post";
@@ -44,10 +45,10 @@ blogForm.addEventListener('submit', function(event) {
         updatePost(editPostId);
     } else addPost();
 
-    });
+});
 
 //If valid, create a new post object (e.g., with id, title, content, timestamp).
-function addPost () {
+function addPost() {
     const newPostId = blogPosts.reduce((maxId, post) => // .reduce() turns all elements of an array to a single value
         Math.max(maxId, post.id), 0) + 1;
 
@@ -61,14 +62,14 @@ function addPost () {
     blogPosts.push(post);
 
     // converts to string for local storage
-    localStorage.setItem('blogPosts', JSON.stringify(blogPosts)); 
+    localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
 
     displayPosts();
 };
 
 // Create a function that takes the array of posts and dynamically creates the HTML to display them.
-function displayPosts () {
-    
+function displayPosts() {
+
     blogList.innerHTML = "";
 
     for (let post of blogPosts) {
@@ -79,18 +80,21 @@ function displayPosts () {
         let editButton = document.createElement('button');
         let deleteButton = document.createElement('button');
 
+        editButton.classList.add('edit-button');
+        deleteButton.classList.add('delete-button');
+
         postTitle.textContent = post.title;
         postContent.textContent = post.content;
         editButton.textContent = 'Edit';
         deleteButton.textContent = 'Delete';
 
         //Add event listeners to “Edit” buttons.
-        editButton.addEventListener('click', function() {
+        editButton.addEventListener('click', function () {
             editPost(post.id);
         })
 
         // Use event delegation or add event listeners to “Delete” buttons.
-        deleteButton.addEventListener('click', function() {
+        deleteButton.addEventListener('click', function () {
             deletePost(post.id); //When a “Delete” button is clicked, identify the post to be deleted 
         })
 
@@ -121,9 +125,9 @@ function updatePost(id) {
 
     postToUpdate.title = inputTitle.value;
     postToUpdate.content = inputPost.value;
-    
+
     // converts to string for local storage
-    localStorage.setItem('blogPosts', JSON.stringify(blogPosts)); 
+    localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
 
     //Re-render the posts.
     displayPosts();
@@ -141,14 +145,4 @@ function deletePost(id) {
     //Re-render the posts.
     displayPosts();
 
-    }
-//Load Posts from localStorage: On script load, check localStorage for existing posts. If found, parse them and render them on the page.
-
-    //Save the updated array of posts to localStorage (remember to JSON.stringify).
-    //Re-render the list of posts on the page.
-    //Clear the form fields.
-    
-    //When an “Edit” button is clicked, populate the form (or a dedicated edit form/modal) with the selected post’s title and content. 
-    //Modify the form submission logic (or create a separate update function) to update the existing post in your local array instead of creating a new one.
-
-//Utility Functions (Optional but Recommended): Consider helper functions for tasks like generating unique IDs, saving to localStorage, loading from localStorage, etc.
+}
